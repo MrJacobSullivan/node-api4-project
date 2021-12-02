@@ -1,17 +1,26 @@
+const shortid = require('shortid');
+
+const users = [
+  { id: shortid.generate(), username: 'Foo' },
+  { id: shortid.generate(), username: 'Bar' },
+  { id: shortid.generate(), username: 'Baz' },
+];
+
 const get = () => {
   // db call goes here
 
-  return [
-    { id: 1, username: 'Foo' },
-    { id: 2, username: 'Bar' },
-    { id: 3, username: 'Baz' },
-  ];
+  return users.map((user) => ({
+    id: user.id,
+    username: user.username,
+  }));
 };
 
 const insert = (user) => {
   // db call goes here
 
-  return { id: 4, ...user };
+  users.push({ id: shortid.generate(), ...user });
+
+  return users[users.length - 1];
 };
 
 module.exports = {

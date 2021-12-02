@@ -1,3 +1,5 @@
+const Users = require('../users/users-model');
+
 const logger = (req, res, next) => {
   console.log('request method:', req.method);
   console.log('request url:', req.url);
@@ -16,6 +18,8 @@ const validateUser = (req, res, next) => {
     next();
   }
 };
+
+const checkUsername = (req, res, next) => {};
 
 // eslint-disable-next-line
 const errorHandling = (err, req, res, next) => {
