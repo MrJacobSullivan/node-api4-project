@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { validateUser } = require('../middleware/middleware');
+const { validateUser, validateAuth } = require('../middleware/middleware');
 
 const Users = require('./users-model');
 
@@ -19,6 +19,14 @@ router.post('/register', validateUser, async (req, res, next) => {
   try {
     const user = await Users.insert({ username: req.body.username, password: req.body.password });
     res.status(201).json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/login', [validateUser, validateAuth], async (req, res, next) => {
+  try {
+    res.status(200).json({ ...req.user, message: 'Welcome!' });
   } catch (err) {
     next(err);
   }
