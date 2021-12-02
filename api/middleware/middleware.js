@@ -9,7 +9,7 @@ const logger = (req, res, next) => {
 const validateUser = (req, res, next) => {
   const { username, password } = req.body;
 
-  if (!username || !username.trim() || !password || !password.trim()) {
+  if (!username || !password) {
     next({ status: 404, message: 'Username and Password are required.' });
   } else {
     req.user = { username, password };
