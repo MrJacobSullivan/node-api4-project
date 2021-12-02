@@ -15,6 +15,10 @@ const get = () => {
   }));
 };
 
+const getById = (id) => {
+  return users.find((user) => user.id === id);
+};
+
 const insert = (user) => {
   // db call goes here
 
@@ -25,5 +29,6 @@ const insert = (user) => {
 
 module.exports = {
   get,
+  getById,
   insert,
 };

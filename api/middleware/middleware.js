@@ -19,7 +19,19 @@ const validateUser = (req, res, next) => {
   }
 };
 
-const checkUsername = (req, res, next) => {};
+const validateUserId = (req, res, next) => {
+  try {
+    const user = await Users.getById(req.params.id);
+    if (user) {
+      req.user = user;
+      next();
+    } else {
+      next({ status: 404, message: 'User not found.' });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
 // eslint-disable-next-line
 const errorHandling = (err, req, res, next) => {
@@ -29,5 +41,6 @@ const errorHandling = (err, req, res, next) => {
 module.exports = {
   logger,
   validateUser,
+  validateUserId,
   errorHandling,
 };
